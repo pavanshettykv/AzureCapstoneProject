@@ -1,0 +1,5 @@
+A third party service drops a file named orders.csv in the landing folder.
+Requirement:
+As soon as file arrives in landing folder, perform the following checks
+1. Check for duplicate order_id in order_status
+2. Check for valid orders_status
