@@ -1,0 +1,21 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "datafactory1021"
+		},
+		"ls_AzureDataLakeStorage_accountKey": {
+			"value": ""
+		},
+		"ls_AzureDataLakeStorage_properties_typeProperties_url": {
+			"value": "https://dlk1012.dfs.core.windows.net/"
+		},
+		"ls_AzureKeyVault_properties_typeProperties_baseUrl": {
+			"value": "https://azurecapstonekeyvault.vault.azure.net/"
+		},
+		"trigger_adls_properties_typeProperties_scope": {
+			"value": "/subscriptions/58b57763-ddb6-4a5c-89b2-6b5dc4941add/resourceGroups/adb/providers/Microsoft.Storage/storageAccounts/dlk1012"
+		}
+	}
+}
