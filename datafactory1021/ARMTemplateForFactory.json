@@ -143,7 +143,8 @@
 				],
 				"type": "BlobEventsTrigger",
 				"typeProperties": {
-					"blobPathBeginsWith": "/landing/blobs/orders.csv",
+					"blobPathBeginsWith": "/sales/blobs/landing",
+					"blobPathEndsWith": "orders.csv",
 					"ignoreEmptyBlobs": true,
 					"scope": "[parameters('trigger_adls_properties_typeProperties_scope')]",
 					"events": [
