@@ -13,7 +13,8 @@
 		],
 		"type": "BlobEventsTrigger",
 		"typeProperties": {
-			"blobPathBeginsWith": "/landing/blobs/orders.csv",
+			"blobPathBeginsWith": "/sales/blobs/landing",
+			"blobPathEndsWith": "orders.csv",
 			"ignoreEmptyBlobs": true,
 			"scope": "/subscriptions/58b57763-ddb6-4a5c-89b2-6b5dc4941add/resourceGroups/adb/providers/Microsoft.Storage/storageAccounts/dlk1012",
 			"events": [
