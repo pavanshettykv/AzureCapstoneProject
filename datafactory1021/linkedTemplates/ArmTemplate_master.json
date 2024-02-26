@@ -21,7 +21,7 @@
 		},
 		"trigger_adls_properties_pl_data_validate_parameters_filename": {
 			"type": "string",
-			"defaultValue": "triggerBody().filename"
+			"defaultValue": "@triggerBody().filename"
 		},
 		"trigger_adls_properties_typeProperties_scope": {
 			"type": "string",
