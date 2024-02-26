@@ -19,6 +19,10 @@
 			"type": "string",
 			"defaultValue": "https://azurecapstonekeyvault.vault.azure.net/"
 		},
+		"trigger_adls_properties_pl_data_validate_parameters_filename": {
+			"type": "string",
+			"defaultValue": "@triggerBody().filename"
+		},
 		"trigger_adls_properties_typeProperties_scope": {
 			"type": "string",
 			"defaultValue": "/subscriptions/58b57763-ddb6-4a5c-89b2-6b5dc4941add/resourceGroups/adb/providers/Microsoft.Storage/storageAccounts/dlk1012"
@@ -47,7 +51,13 @@
 						},
 						"userProperties": [],
 						"typeProperties": {
-							"notebookPath": "/Users/pavanshettykv@outlook.com/capastone project"
+							"notebookPath": "/Users/pavanshettykv@outlook.com/capastone project",
+							"baseParameters": {
+								"filename": {
+									"value": "@pipeline().parameters.filename",
+									"type": "Expression"
+								}
+							}
 						},
 						"linkedServiceName": {
 							"referenceName": "ls_AzureDatabricks",
@@ -57,6 +67,11 @@
 				],
 				"policy": {
 					"elapsedTimeMetric": {}
+				},
+				"parameters": {
+					"filename": {
+						"type": "string"
+					}
 				},
 				"annotations": []
 			},
@@ -138,13 +153,15 @@
 							"referenceName": "pl_data_validate",
 							"type": "PipelineReference"
 						},
-						"parameters": {}
+						"parameters": {
+							"filename": "[parameters('trigger_adls_properties_pl_data_validate_parameters_filename')]"
+						}
 					}
 				],
 				"type": "BlobEventsTrigger",
 				"typeProperties": {
 					"blobPathBeginsWith": "/sales/blobs/landing",
-					"blobPathEndsWith": "orders.csv",
+					"blobPathEndsWith": ".csv",
 					"ignoreEmptyBlobs": true,
 					"scope": "[parameters('trigger_adls_properties_typeProperties_scope')]",
 					"events": [
