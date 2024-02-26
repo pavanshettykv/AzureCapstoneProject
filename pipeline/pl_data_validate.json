@@ -15,7 +15,13 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"notebookPath": "/Users/pavanshettykv@outlook.com/capastone project"
+					"notebookPath": "/Users/pavanshettykv@outlook.com/capastone project",
+					"baseParameters": {
+						"filename": {
+							"value": "@pipeline().parameters.filename",
+							"type": "Expression"
+						}
+					}
 				},
 				"linkedServiceName": {
 					"referenceName": "ls_AzureDatabricks",
@@ -23,6 +29,11 @@
 				}
 			}
 		],
+		"parameters": {
+			"filename": {
+				"type": "string"
+			}
+		},
 		"annotations": []
 	}
 }
