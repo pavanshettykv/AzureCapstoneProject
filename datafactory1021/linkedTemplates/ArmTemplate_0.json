@@ -574,6 +574,12 @@
 								"dependencyConditions": [
 									"Succeeded"
 								]
+							},
+							{
+								"activity": "Copy customer data to sql db",
+								"dependencyConditions": [
+									"Succeeded"
+								]
 							}
 						],
 						"policy": {
@@ -702,6 +708,170 @@
 								"parameters": {}
 							}
 						]
+					},
+					{
+						"name": "Copy customer data to sql db",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "GoogleCloudStorageReadSettings",
+									"recursive": true,
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "customer_id",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "customer_id",
+											"type": "Int32",
+											"physicalType": "int"
+										}
+									},
+									{
+										"source": {
+											"name": "customer_fname",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "customer_fname",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "customer_lname",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "customer_lname",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "username",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "customer_email",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "password",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "customer_password",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "address",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "customer_street",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "city",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "customer_city",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "state",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "customer_state",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "pincode",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "customer_zipcode",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "ds_gcs_customers",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "ds_customer_table",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
 					}
 				],
 				"policy": {
@@ -717,7 +887,9 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/ls_AzureDatabricks')]",
 				"[concat(variables('factoryId'), '/datasets/ds_s3_order_items')]",
-				"[concat(variables('factoryId'), '/datasets/ds_adls_orders')]"
+				"[concat(variables('factoryId'), '/datasets/ds_adls_orders')]",
+				"[concat(variables('factoryId'), '/datasets/ds_gcs_customers')]",
+				"[concat(variables('factoryId'), '/datasets/ds_customer_table')]"
 			]
 		},
 		{
