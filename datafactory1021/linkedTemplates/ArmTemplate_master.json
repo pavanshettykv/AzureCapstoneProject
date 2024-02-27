@@ -7,9 +7,25 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "datafactory1021"
 		},
+		"ls_AmazonS3_secretAccessKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'secretAccessKey' of 'ls_AmazonS3'"
+		},
 		"ls_AzureDataLakeStorage_accountKey": {
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'ls_AzureDataLakeStorage'"
+		},
+		"ls_AzureSqlDatabase_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ls_AzureSqlDatabase'"
+		},
+		"ls_GoogleCloudStorage_secretAccessKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'secretAccessKey' of 'ls_GoogleCloudStorage'"
+		},
+		"ls_AmazonS3_properties_typeProperties_accessKeyId": {
+			"type": "string",
+			"defaultValue": "AKIATCKAQMCPNTYOP6XM"
 		},
 		"ls_AzureDataLakeStorage_properties_typeProperties_url": {
 			"type": "string",
@@ -18,6 +34,10 @@
 		"ls_AzureKeyVault_properties_typeProperties_baseUrl": {
 			"type": "string",
 			"defaultValue": "https://azurecapstonekeyvault.vault.azure.net/"
+		},
+		"ls_GoogleCloudStorage_properties_typeProperties_accessKeyId": {
+			"type": "string",
+			"defaultValue": "GOOG3XL2A6HHIZONL3U4FY54"
 		},
 		"trigger_adls_properties_pl_data_validate_parameters_filename": {
 			"type": "string",
@@ -54,14 +74,29 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
+					"ls_AmazonS3_secretAccessKey": {
+						"value": "[parameters('ls_AmazonS3_secretAccessKey')]"
+					},
 					"ls_AzureDataLakeStorage_accountKey": {
 						"value": "[parameters('ls_AzureDataLakeStorage_accountKey')]"
+					},
+					"ls_AzureSqlDatabase_connectionString": {
+						"value": "[parameters('ls_AzureSqlDatabase_connectionString')]"
+					},
+					"ls_GoogleCloudStorage_secretAccessKey": {
+						"value": "[parameters('ls_GoogleCloudStorage_secretAccessKey')]"
+					},
+					"ls_AmazonS3_properties_typeProperties_accessKeyId": {
+						"value": "[parameters('ls_AmazonS3_properties_typeProperties_accessKeyId')]"
 					},
 					"ls_AzureDataLakeStorage_properties_typeProperties_url": {
 						"value": "[parameters('ls_AzureDataLakeStorage_properties_typeProperties_url')]"
 					},
 					"ls_AzureKeyVault_properties_typeProperties_baseUrl": {
 						"value": "[parameters('ls_AzureKeyVault_properties_typeProperties_baseUrl')]"
+					},
+					"ls_GoogleCloudStorage_properties_typeProperties_accessKeyId": {
+						"value": "[parameters('ls_GoogleCloudStorage_properties_typeProperties_accessKeyId')]"
 					},
 					"trigger_adls_properties_pl_data_validate_parameters_filename": {
 						"value": "[parameters('trigger_adls_properties_pl_data_validate_parameters_filename')]"

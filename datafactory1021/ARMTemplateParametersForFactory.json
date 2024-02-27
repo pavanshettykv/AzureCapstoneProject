@@ -5,14 +5,29 @@
 		"factoryName": {
 			"value": "datafactory1021"
 		},
+		"ls_AmazonS3_secretAccessKey": {
+			"value": ""
+		},
 		"ls_AzureDataLakeStorage_accountKey": {
 			"value": ""
+		},
+		"ls_AzureSqlDatabase_connectionString": {
+			"value": ""
+		},
+		"ls_GoogleCloudStorage_secretAccessKey": {
+			"value": ""
+		},
+		"ls_AmazonS3_properties_typeProperties_accessKeyId": {
+			"value": "AKIATCKAQMCPNTYOP6XM"
 		},
 		"ls_AzureDataLakeStorage_properties_typeProperties_url": {
 			"value": "https://dlk1012.dfs.core.windows.net/"
 		},
 		"ls_AzureKeyVault_properties_typeProperties_baseUrl": {
 			"value": "https://azurecapstonekeyvault.vault.azure.net/"
+		},
+		"ls_GoogleCloudStorage_properties_typeProperties_accessKeyId": {
+			"value": "GOOG3XL2A6HHIZONL3U4FY54"
 		},
 		"trigger_adls_properties_pl_data_validate_parameters_filename": {
 			"value": "@triggerBody().filename"
