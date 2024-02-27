@@ -5,7 +5,14 @@
 			{
 				"name": "Notebook1",
 				"type": "DatabricksNotebook",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "Copy data orders_items s3 to adls",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 0,
@@ -27,6 +34,109 @@
 					"referenceName": "ls_AzureDatabricks",
 					"type": "LinkedServiceReference"
 				}
+			},
+			{
+				"name": "Copy data orders_items s3 to adls",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "JsonSource",
+						"storeSettings": {
+							"type": "AmazonS3ReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "JsonReadSettings"
+						}
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".csv"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "$['order_item_id']"
+								},
+								"sink": {
+									"name": "order_item_id"
+								}
+							},
+							{
+								"source": {
+									"path": "$['order_item_order_id']"
+								},
+								"sink": {
+									"name": "order_item_order_id"
+								}
+							},
+							{
+								"source": {
+									"path": "$['order_item_product_id']"
+								},
+								"sink": {
+									"name": "order_item_product_id"
+								}
+							},
+							{
+								"source": {
+									"path": "$['order_item_quantity']"
+								},
+								"sink": {
+									"name": "order_item_quantity"
+								}
+							},
+							{
+								"source": {
+									"path": "$['order_item_subtotal']"
+								},
+								"sink": {
+									"name": "order_item_subtotal"
+								}
+							},
+							{
+								"source": {
+									"path": "$['order_item_product_price']"
+								},
+								"sink": {
+									"name": "order_item_product_price"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_s3_order_items",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_adls_orders",
+						"type": "DatasetReference"
+					}
+				]
 			}
 		],
 		"parameters": {
