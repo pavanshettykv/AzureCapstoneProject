@@ -1,0 +1,28 @@
+{
+	"name": "trigger_adls",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "pl_data_validate",
+					"type": "PipelineReference"
+				},
+				"parameters": {
+					"filename": "@triggerBody().filename"
+				}
+			}
+		],
+		"type": "BlobEventsTrigger",
+		"typeProperties": {
+			"blobPathBeginsWith": "/sales/blobs/landing",
+			"blobPathEndsWith": ".csv",
+			"ignoreEmptyBlobs": true,
+			"scope": "/subscriptions/58b57763-ddb6-4a5c-89b2-6b5dc4941add/resourceGroups/adb/providers/Microsoft.Storage/storageAccounts/dlk1012",
+			"events": [
+				"Microsoft.Storage.BlobCreated"
+			]
+		}
+	}
+}
