@@ -3,3 +3,10 @@ Requirement:
 As soon as file arrives in landing folder, perform the following checks
 1. Check for duplicate order_id in order_status
 2. Check for valid orders_status
+
+*  Automatically trigger a pipeline execution when any file is added to the Storage Account Container.
+*  Ingesting customers data from Google cloud storage to Azure SQL DB
+*  Ingesting order_items data from AWS S3 to ADLS gen 2
+*  Joining 3 datasets and calculating:
+    1. No.of orders placed by each customer
+    2. Amount spent by each customer
